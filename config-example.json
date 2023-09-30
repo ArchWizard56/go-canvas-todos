@@ -1,0 +1,9 @@
+{
+    "canvas_host": "canvas.example.com",
+    "canvas_key": "<YOUR CANVAS KEY>",
+    "dav_url": "https://dav.example.com",
+    "dav_username": "<YOUR DAV USER>",
+    "dav_password": "<YOUR DAV PASSWORD>",
+    "task_calendar": "<CALENDAR TO ADD TASKS>",
+    "disable_tls": false
+}
