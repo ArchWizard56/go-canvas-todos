@@ -2,12 +2,28 @@ package main
 
 import (
 	"crypto/tls"
+	"errors"
 	"net/http"
+	"os"
 )
 
 func main() {
+
+	var config *Config
+
+	// If we have a config file from argv[1], use that
+	if len(os.Args) == 2 {
+		if _, err := os.Stat(os.Args[1]); err == nil {
+			config = LoadConfig(os.Args[1])
+		} else {
+			panic(errors.New("cannot find config file"))
+		}
+	} else if _, err := os.Stat("config.json"); err == nil {
+		config = LoadConfig("config.json")
+	} else {
+		panic(errors.New("cannot find config file"))
+	}
 	// Load configuration from a JSON file
-	config := LoadConfig("config.json")
 
 	// If TLS is disabled in the configuration, skip certificate verification
 	if config.DisableTLS {
