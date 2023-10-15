@@ -9,7 +9,7 @@ import (
 // The retrieved TODO items are returned as a slice of canvas.TODO values.
 func GetCanvasTodos() []canvas.TODO {
 	// Load configuration data from "config.json"
-	config := LoadConfig("config.json")
+	config := LoadConfig()
 
 	// Initialize the Canvas API client with the API key and host URL from the configuration
 	canvas := canvas.WithHost(config.CanvasKey, config.CanvasHost)
@@ -29,7 +29,7 @@ func GetCanvasTodos() []canvas.TODO {
 
 func GetCourse(id int) *canvas.Course {
 	// Load configuration data from "config.json"
-	config := LoadConfig("config.json")
+	config := LoadConfig()
 
 	// Initialize the Canvas API client with the API key and host URL from the configuration
 	canvas := canvas.WithHost(config.CanvasKey, config.CanvasHost)

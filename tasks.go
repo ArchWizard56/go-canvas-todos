@@ -22,7 +22,7 @@ type Task struct {
 // GetTasks retrieves tasks from a WebDAV calendar and returns them as a slice of Task.
 func GetTasks() []Task {
 	// Load configuration from config.json
-	config := LoadConfig("config.json")
+	config := LoadConfig()
 
 	// Create an HTTP client with basic authentication for WebDAV
 	c := webdav.HTTPClientWithBasicAuth(nil, config.DavUsername, config.DavPassword)
@@ -93,7 +93,7 @@ func GetTasks() []Task {
 // UpdateToDo updates a task in the WebDAV calendar.
 func UpdateToDo(id string, title string, calendar string, category string, description string, due time.Time) {
 	// Load configuration from config.json
-	config := LoadConfig("config.json")
+	config := LoadConfig()
 
 	// Create an HTTP client with basic authentication for WebDAV
 	c := webdav.HTTPClientWithBasicAuth(nil, config.DavUsername, config.DavPassword)
@@ -135,7 +135,7 @@ func UpdateToDo(id string, title string, calendar string, category string, descr
 // AddTodo adds a new task to the WebDAV calendar.
 func AddTodo(title string, calendar string, category string, description string, due time.Time) {
 	// Load configuration from config.json
-	config := LoadConfig("config.json")
+	config := LoadConfig()
 
 	// Create an HTTP client with basic authentication for WebDAV
 	c := webdav.HTTPClientWithBasicAuth(nil, config.DavUsername, config.DavPassword)

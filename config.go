@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"io"
 	"os"
 )
@@ -20,8 +21,32 @@ type Config struct {
 // LoadConfig loads the configuration data from the specified file path.
 // It opens and reads the JSON file, unmarshals it into a Config struct,
 // and returns a pointer to the loaded Config.
-func LoadConfig(config_path string) *Config {
-	// Open the configuration file
+func LoadConfig() *Config {
+	var config_path string
+	if len(os.Args) == 2 {
+		config_path = os.Args[1]
+		fileinfo, err := os.Stat(config_path)
+		if errors.Is(err, os.ErrNotExist) {
+			panic(errors.New("provided config file does not exist"))
+		} else if err != nil {
+			panic(err)
+		}
+		if fileinfo.IsDir() {
+			panic(errors.New("cannot load config from directory"))
+		}
+	} else {
+		config_path = "config.json"
+		fileinfo, err := os.Stat(config_path)
+		if errors.Is(err, os.ErrNotExist) {
+			panic(errors.New("provided config file does not exist"))
+		} else if err != nil {
+			panic(err)
+		}
+		if fileinfo.IsDir() {
+			panic(errors.New("cannot load config from directory"))
+		}
+	}
+
 	config_file, err := os.Open(config_path)
 	if err != nil {
 		// If there's an error opening the file, panic and terminate the program
